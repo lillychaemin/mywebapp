@@ -410,4 +410,3 @@ st.markdown(
     '<div class="footer">Made with ♡ and 📚 for curious readers</div>',
     unsafe_allow_html=True
 )
-```
