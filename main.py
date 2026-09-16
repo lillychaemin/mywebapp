@@ -2,7 +2,7 @@ import streamlit as st
 
 st.title("첫 배포 확인 👋")
 st.write("여기까지 보이면 배포 성공입니다.")
-```python
+python
 import streamlit as st
 
 # --------------------------------------------------
@@ -252,4 +252,3 @@ st.markdown(
     '<div class="footer">Made with 💗 for your next adventure ✈️</div>',
     unsafe_allow_html=True
 )
-```
