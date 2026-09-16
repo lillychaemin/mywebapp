@@ -4,409 +4,243 @@ st.title("첫 배포 확인 👋")
 st.write("여기까지 보이면 배포 성공입니다.")
 import streamlit as st
 
-# ----------------------------------------
+# --------------------------------------------------
 # 페이지 설정
-# ----------------------------------------
+# --------------------------------------------------
 st.set_page_config(
-    page_title="MBTI 고전소설 처방전 💕",
+    page_title="MBTI 고전소설 추천소 📚",
     page_icon="📖",
     layout="centered"
 )
 
-# ----------------------------------------
-# 귀여운 디자인
-# ----------------------------------------
+# --------------------------------------------------
+# CSS - 귀엽고 사랑스러운 디자인
+# --------------------------------------------------
 st.markdown("""
 <style>
-.stApp {
-    background: linear-gradient(
-        135deg,
-        #fff8fc 0%,
-        #fff2f7 50%,
-        #f5f0ff 100%
-    );
-}
+    .stApp {
+        background: linear-gradient(180deg, #fff7fb 0%, #f8f5ff 100%);
+    }
 
-.main-title {
-    text-align: center;
-    color: #e889a8;
-    font-size: 45px;
-    font-weight: 900;
-    margin-top: 10px;
-    margin-bottom: 5px;
-}
+    .title {
+        text-align: center;
+        font-size: 42px;
+        font-weight: 800;
+        color: #8e6bbd;
+        margin-bottom: 5px;
+    }
 
-.sub-title {
-    text-align: center;
-    color: #9a8c96;
-    font-size: 17px;
-    margin-bottom: 25px;
-}
+    .subtitle {
+        text-align: center;
+        font-size: 17px;
+        color: #777;
+        margin-bottom: 30px;
+    }
 
-.deco {
-    text-align: center;
-    font-size: 25px;
-    letter-spacing: 8px;
-}
+    .heart {
+        text-align: center;
+        font-size: 45px;
+        margin-bottom: 5px;
+    }
 
-.book-card {
-    background: rgba(255, 255, 255, 0.94);
-    border: 2px solid #f6d6e2;
-    border-radius: 30px;
-    padding: 30px;
-    margin-top: 25px;
-    box-shadow: 0 10px 30px rgba(200, 140, 170, 0.16);
-}
+    .recommend-box {
+        background-color: white;
+        padding: 22px;
+        margin: 15px 0;
+        border-radius: 22px;
+        border: 2px solid #f0d9ee;
+        box-shadow: 0 5px 15px rgba(180, 140, 190, 0.12);
+    }
 
-.mbti {
-    text-align: center;
-    color: #e889a8;
-    font-size: 18px;
-    font-weight: 800;
-}
+    .book-title {
+        font-size: 24px;
+        font-weight: 700;
+        color: #8064a2;
+    }
 
-.book-title {
-    text-align: center;
-    color: #9a78c7;
-    font-size: 32px;
-    font-weight: 900;
-    margin-top: 12px;
-}
+    .book-info {
+        font-size: 16px;
+        color: #555;
+        line-height: 1.7;
+    }
 
-.author {
-    text-align: center;
-    color: #888;
-    font-size: 16px;
-    margin-bottom: 20px;
-}
-
-.description {
-    color: #666;
-    font-size: 16px;
-    line-height: 1.8;
-}
-
-.section {
-    color: #e889a8;
-    font-size: 18px;
-    font-weight: 800;
-    margin-top: 20px;
-    margin-bottom: 5px;
-}
-
-.cute-box {
-    background: #fff4f8;
-    border-radius: 20px;
-    padding: 16px;
-    margin-top: 20px;
-    text-align: center;
-    color: #888;
-}
-
-.footer {
-    text-align: center;
-    color: #b9aeb5;
-    font-size: 13px;
-    margin-top: 35px;
-    padding-bottom: 20px;
-}
-
-div.stButton > button {
-    width: 100%;
-    border-radius: 25px;
-    border: none;
-    background: linear-gradient(
-        90deg,
-        #ff9fbc,
-        #c9a3ed
-    );
-    color: white;
-    font-size: 17px;
-    font-weight: 800;
-    padding: 12px;
-}
-
-div.stButton > button:hover {
-    transform: scale(1.02);
-}
+    .footer {
+        text-align: center;
+        color: #999;
+        font-size: 14px;
+        margin-top: 35px;
+    }
 </style>
 """, unsafe_allow_html=True)
 
-
-# ----------------------------------------
-# MBTI별 고전소설 추천 데이터
-# ----------------------------------------
+# --------------------------------------------------
+# 고전소설 데이터
+# --------------------------------------------------
 books = {
+    "INTJ": [
+        ("구운몽", "김만중", "깊이 생각하는 것을 좋아하는 INTJ에게 이상과 현실, 삶의 의미를 생각하게 하는 이야기를 추천해요."),
+        ("홍길동전", "허균", "불합리한 사회를 비판하고 새로운 세상을 꿈꾸는 홍길동의 모습이 INTJ의 문제의식과 잘 어울려요."),
+        ("금오신화", "김시습", "신비롭고 철학적인 이야기를 좋아하는 INTJ에게 상상력과 사색을 동시에 선물해요.")
+    ],
 
-    "INTJ": {
-        "title": "1984",
-        "author": "조지 오웰",
-        "emoji": "👁️",
-        "reason": "사회 구조와 인간의 자유에 대해 깊이 생각하는 것을 좋아한다면 잘 어울리는 작품이에요.",
-        "point": "🧠 사회 · 권력 · 자유 · 인간의 사고",
-        "message": "조용히 읽으면서 작품 속 세계를 분석해보는 시간을 가져보세요."
-    },
+    "INTP": [
+        ("금오신화", "김시습", "독특한 세계관과 기묘한 이야기를 탐구하는 재미가 있어 호기심 많은 INTP에게 잘 어울려요."),
+        ("구운몽", "김만중", "꿈과 현실의 관계를 생각하며 여러 가지 해석을 해볼 수 있는 작품이에요."),
+        ("홍길동전", "허균", "당시 사회의 문제를 논리적으로 바라보며 생각해볼 수 있는 작품이에요.")
+    ],
 
-    "INTP": {
-        "title": "프랑켄슈타인",
-        "author": "메리 셸리",
-        "emoji": "⚡",
-        "reason": "과학과 인간의 본질, 창조와 책임이라는 흥미로운 질문을 던지는 작품이에요.",
-        "point": "🔬 과학 · 철학 · 인간 본성",
-        "message": "책을 읽으며 '창조한 사람의 책임은 어디까지일까?' 생각해보세요."
-    },
+    "ENTJ": [
+        ("홍길동전", "허균", "자신만의 이상적인 사회를 만들어가는 홍길동의 모습이 주도적인 ENTJ와 잘 어울려요."),
+        ("춘향전", "작자 미상", "자신의 신념을 지키며 적극적으로 행동하는 춘향의 모습이 인상적인 작품이에요."),
+        ("박씨전", "작자 미상", "뛰어난 능력과 지혜로 어려움을 극복하는 박씨의 이야기를 추천해요.")
+    ],
 
-    "ENTJ": {
-        "title": "레 미제라블",
-        "author": "빅토르 위고",
-        "emoji": "⚖️",
-        "reason": "거대한 사회와 인간의 선택을 다루는 장대한 이야기를 좋아한다면 잘 맞아요.",
-        "point": "⚔️ 사회 · 정의 · 변화 · 인간",
-        "message": "등장인물들의 선택과 그 결과를 따라가며 읽어보세요."
-    },
+    "ENTP": [
+        ("홍길동전", "허균", "기존의 사회질서에 도전하고 새로운 세상을 꿈꾸는 이야기가 ENTP의 도전정신과 잘 맞아요."),
+        ("금오신화", "김시습", "기발하고 독특한 사건들이 이어져 새로운 것을 좋아하는 ENTP에게 재미있어요."),
+        ("전우치전", "작자 미상", "엉뚱하고 자유로운 전우치의 활약을 보며 즐겁게 읽을 수 있어요.")
+    ],
 
-    "ENTP": {
-        "title": "돈키호테",
-        "author": "미겔 데 세르반테스",
-        "emoji": "🐴",
-        "reason": "엉뚱하고 자유로운 상상력과 풍자를 좋아한다면 재미있게 읽을 수 있어요.",
-        "point": "🎭 모험 · 유머 · 풍자 · 상상",
-        "message": "현실과 상상의 경계가 어떻게 뒤섞이는지 찾아보세요!"
-    },
+    "INFJ": [
+        ("춘향전", "작자 미상", "사랑과 신념을 끝까지 지키는 춘향의 모습이 깊은 가치관을 중요하게 생각하는 INFJ와 잘 어울려요."),
+        ("심청전", "작자 미상", "희생과 사랑이라는 깊은 주제를 생각해볼 수 있는 따뜻한 작품이에요."),
+        ("구운몽", "김만중", "삶의 의미와 행복에 대해 조용히 생각해볼 수 있는 작품이에요.")
+    ],
 
-    "INFJ": {
-        "title": "데미안",
-        "author": "헤르만 헤세",
-        "emoji": "🦋",
-        "reason": "자아와 성장, 자신의 내면을 탐색하는 이야기를 좋아한다면 잘 어울려요.",
-        "point": "🌙 성장 · 자아 · 내면 · 삶",
-        "message": "주인공의 성장 과정에서 나와 비슷한 순간을 찾아보세요."
-    },
+    "INFP": [
+        ("춘향전", "작자 미상", "순수한 사랑과 자신의 신념을 지키는 춘향의 모습이 감성적인 INFP에게 잘 어울려요."),
+        ("심청전", "작자 미상", "가족을 향한 사랑과 희생이라는 따뜻한 이야기가 INFP의 감성을 자극해요."),
+        ("흥부전", "작자 미상", "착한 마음과 따뜻한 인간미를 느낄 수 있는 사랑스러운 작품이에요.")
+    ],
 
-    "INFP": {
-        "title": "어린 왕자",
-        "author": "앙투안 드 생텍쥐페리",
-        "emoji": "🌹",
-        "reason": "따뜻하면서도 깊은 의미가 담긴 이야기를 좋아하는 사람에게 잘 어울려요.",
-        "point": "🌟 사랑 · 우정 · 관계 · 순수함",
-        "message": "책을 읽고 '나에게 정말 소중한 것은 무엇일까?' 생각해보세요."
-    },
+    "ENFJ": [
+        ("흥부전", "작자 미상", "주변 사람을 생각하는 따뜻한 마음과 나눔의 가치를 담고 있어 ENFJ와 잘 어울려요."),
+        ("춘향전", "작자 미상", "사람 사이의 관계와 사랑을 중심으로 이야기가 펼쳐져 공감 능력이 높은 ENFJ에게 좋아요."),
+        ("심청전", "작자 미상", "가족을 위한 사랑과 희생을 통해 따뜻한 감정을 느낄 수 있어요.")
+    ],
 
-    "ENFJ": {
-        "title": "작은 아씨들",
-        "author": "루이자 메이 올컷",
-        "emoji": "🏡",
-        "reason": "사람 사이의 관계와 성장, 가족의 따뜻함을 좋아한다면 잘 맞는 작품이에요.",
-        "point": "💕 가족 · 성장 · 우정 · 꿈",
-        "message": "네 자매의 서로 다른 꿈과 성장을 비교하며 읽어보세요."
-    },
+    "ENFP": [
+        ("전우치전", "작자 미상", "자유롭고 유쾌한 전우치의 모험이 활발하고 상상력이 풍부한 ENFP에게 딱이에요!"),
+        ("홍길동전", "허균", "새로운 세상을 꿈꾸며 모험을 떠나는 이야기가 ENFP의 자유로운 성향과 잘 맞아요."),
+        ("금오신화", "김시습", "신비롭고 상상력이 가득한 이야기라서 ENFP가 즐겁게 읽을 수 있어요.")
+    ],
 
-    "ENFP": {
-        "title": "이상한 나라의 앨리스",
-        "author": "루이스 캐럴",
-        "emoji": "🐇",
-        "reason": "상상력이 풍부하고 엉뚱하고 신비로운 세계를 좋아한다면 딱이에요!",
-        "point": "🎀 모험 · 상상 · 판타지 · 호기심",
-        "message": "현실에서는 절대 볼 수 없는 이상한 세계를 마음껏 즐겨보세요."
-    },
+    "ISTJ": [
+        ("춘향전", "작자 미상", "자신의 약속과 원칙을 끝까지 지키는 춘향의 모습이 책임감 강한 ISTJ와 잘 어울려요."),
+        ("심청전", "작자 미상", "가족을 위해 자신의 책임을 다하는 심청의 모습이 인상적인 작품이에요."),
+        ("흥부전", "작자 미상", "성실함과 선행이라는 주제를 생각해볼 수 있는 작품이에요.")
+    ],
 
-    "ISTJ": {
-        "title": "오만과 편견",
-        "author": "제인 오스틴",
-        "emoji": "💌",
-        "reason": "인물들의 관계와 사회적 배경을 차분하게 관찰하며 읽는 재미가 있어요.",
-        "point": "🎩 사랑 · 사회 · 관계 · 편견",
-        "message": "등장인물들이 처음 서로를 어떻게 판단하는지 주목해보세요."
-    },
+    "ISFJ": [
+        ("심청전", "작자 미상", "가족을 위해 헌신하는 심청의 따뜻한 이야기가 다정한 ISFJ와 잘 어울려요."),
+        ("흥부전", "작자 미상", "어려운 상황에서도 따뜻한 마음을 잃지 않는 흥부의 이야기를 추천해요."),
+        ("춘향전", "작자 미상", "사랑하는 사람을 위해 자신의 마음을 지키는 이야기가 잘 어울려요.")
+    ],
 
-    "ISFJ": {
-        "title": "비밀의 화원",
-        "author": "프랜시스 호지슨 버넷",
-        "emoji": "🌷",
-        "reason": "따뜻한 분위기와 치유, 우정이 담긴 이야기를 좋아한다면 잘 맞아요.",
-        "point": "🌱 우정 · 자연 · 치유 · 성장",
-        "message": "비밀의 정원이 등장인물들에게 어떤 변화를 주는지 살펴보세요."
-    },
+    "ESTJ": [
+        ("홍길동전", "허균", "사회 문제를 해결하고 새로운 질서를 만들어가는 이야기가 현실적이고 추진력 있는 ESTJ와 잘 맞아요."),
+        ("박씨전", "작자 미상", "능력과 지혜를 발휘하여 문제를 해결하는 박씨의 모습이 인상적이에요."),
+        ("춘향전", "작자 미상", "자신의 원칙을 지키며 행동하는 춘향의 모습도 ESTJ와 잘 어울려요.")
+    ],
 
-    "ESTJ": {
-        "title": "삼총사",
-        "author": "알렉상드르 뒤마",
-        "emoji": "⚔️",
-        "reason": "빠른 전개와 목표를 향해 나아가는 모험 이야기를 좋아한다면 추천해요.",
-        "point": "🗡️ 모험 · 우정 · 용기 · 액션",
-        "message": "네 친구의 우정과 모험을 따라가며 신나게 읽어보세요."
-    },
+    "ESFJ": [
+        ("흥부전", "작자 미상", "가족과 이웃을 생각하는 따뜻한 이야기가 사람을 좋아하는 ESFJ와 잘 어울려요."),
+        ("춘향전", "작자 미상", "사랑과 인간관계가 중심이 되는 작품이라 공감하며 읽기 좋아요."),
+        ("심청전", "작자 미상", "가족에 대한 사랑과 정을 느낄 수 있는 따뜻한 작품이에요.")
+    ],
 
-    "ESFJ": {
-        "title": "빨간 머리 앤",
-        "author": "루시 모드 몽고메리",
-        "emoji": "🌸",
-        "reason": "밝고 따뜻한 인간관계와 사랑스러운 캐릭터를 좋아한다면 잘 맞아요.",
-        "point": "🌼 우정 · 가족 · 성장 · 긍정",
-        "message": "앤의 상상력과 주변 사람들과의 관계 변화를 즐겨보세요."
-    },
+    "ISTP": [
+        ("전우치전", "작자 미상", "자유롭고 능숙하게 문제를 해결하는 전우치의 모습이 실용적인 ISTP와 잘 어울려요."),
+        ("홍길동전", "허균", "홍길동의 모험과 행동 중심 이야기를 재미있게 즐길 수 있어요."),
+        ("박씨전", "작자 미상", "위기 상황에서 지혜와 능력을 발휘하는 이야기가 매력적이에요.")
+    ],
 
-    "ISTP": {
-        "title": "보물섬",
-        "author": "로버트 루이스 스티븐슨",
-        "emoji": "🏴‍☠️",
-        "reason": "모험과 긴장감 넘치는 사건을 직접 따라가는 듯한 재미를 느낄 수 있어요.",
-        "point": "🗺️ 모험 · 보물 · 바다 · 탐험",
-        "message": "보물 지도를 들고 모험을 떠난다는 느낌으로 읽어보세요!"
-    },
+    "ISFP": [
+        ("흥부전", "작자 미상", "따뜻한 마음과 인간적인 정을 느낄 수 있어 감성적인 ISFP에게 잘 어울려요."),
+        ("춘향전", "작자 미상", "아름다운 사랑 이야기와 감정을 섬세하게 느낄 수 있는 작품이에요."),
+        ("심청전", "작자 미상", "가족에 대한 사랑과 따뜻한 감정을 느낄 수 있어요.")
+    ],
 
-    "ISFP": {
-        "title": "제인 에어",
-        "author": "샬럿 브론테",
-        "emoji": "🌿",
-        "reason": "섬세한 감정과 아름다운 분위기, 자신의 삶을 개척하는 이야기가 담겨 있어요.",
-        "point": "🌹 사랑 · 독립 · 감정 · 성장",
-        "message": "주인공이 자신의 가치와 선택을 지켜가는 모습을 느껴보세요."
-    },
+    "ESTP": [
+        ("전우치전", "작자 미상", "거침없이 모험을 즐기는 전우치의 모습이 활동적인 ESTP와 찰떡궁합이에요!"),
+        ("홍길동전", "허균", "모험과 행동이 가득한 홍길동의 이야기를 신나게 즐길 수 있어요."),
+        ("박씨전", "작자 미상", "위기를 빠르게 해결하는 박씨의 모습이 ESTP의 행동력과 잘 맞아요.")
+    ],
 
-    "ESTP": {
-        "title": "모비 딕",
-        "author": "허먼 멜빌",
-        "emoji": "🐋",
-        "reason": "거대한 목표를 향해 돌진하는 모험과 긴장감 넘치는 이야기를 좋아한다면 추천해요.",
-        "point": "🌊 바다 · 모험 · 도전 · 집념",
-        "message": "끝없이 펼쳐지는 바다에서 펼쳐지는 거대한 모험을 즐겨보세요."
-    },
-
-    "ESFP": {
-        "title": "위대한 개츠비",
-        "author": "F. 스콧 피츠제럴드",
-        "emoji": "🥂",
-        "reason": "화려한 분위기와 사람들의 관계, 사랑과 꿈에 관한 이야기를 좋아한다면 잘 맞아요.",
-        "point": "✨ 사랑 · 꿈 · 파티 · 인간관계",
-        "message": "화려함 뒤에 숨겨진 등장인물들의 진짜 마음을 찾아보세요."
-    }
+    "ESFP": [
+        ("전우치전", "작자 미상", "유쾌하고 자유로운 모험 이야기가 즐거움을 좋아하는 ESFP에게 딱이에요!"),
+        ("흥부전", "작자 미상", "재미있는 사건과 따뜻한 인간미가 함께 있는 작품이에요."),
+        ("춘향전", "작자 미상", "사랑과 재미있는 사건이 어우러져 즐겁게 읽을 수 있어요.")
+    ]
 }
 
+# --------------------------------------------------
+# 화면
+# --------------------------------------------------
+st.markdown('<div class="heart">🌷📚💗📖🌷</div>', unsafe_allow_html=True)
 
-# ----------------------------------------
-# 제목
-# ----------------------------------------
 st.markdown(
-    '<div class="deco">♡ 📖 ♡ 📚 ♡</div>',
+    '<div class="title">MBTI 고전소설 추천소</div>',
     unsafe_allow_html=True
 )
 
 st.markdown(
-    '<div class="main-title">📖 MBTI 고전소설 처방전 💗</div>',
+    '<div class="subtitle">나의 MBTI와 찰떡궁합인 고전소설을 찾아보자! ✨</div>',
     unsafe_allow_html=True
 )
 
-st.markdown(
-    '<div class="sub-title">너의 성격에 어울리는 한 권의 이야기를 찾아줄게 🌷</div>',
-    unsafe_allow_html=True
-)
+st.divider()
 
-
-# ----------------------------------------
 # MBTI 선택
-# ----------------------------------------
-st.markdown("### 💌 너의 MBTI는 무엇인가요?")
+mbti_list = [
+    "INTJ", "INTP", "ENTJ", "ENTP",
+    "INFJ", "INFP", "ENFJ", "ENFP",
+    "ISTJ", "ISFJ", "ESTJ", "ESFJ",
+    "ISTP", "ISFP", "ESTP", "ESFP"
+]
 
 mbti = st.selectbox(
-    "MBTI 선택",
-    list(books.keys()),
-    label_visibility="collapsed"
+    "💌 당신의 MBTI를 골라주세요!",
+    mbti_list
 )
 
 st.write("")
 
-
-# ----------------------------------------
-# 추천 버튼
-# ----------------------------------------
-if st.button("💗 나에게 맞는 고전소설 찾기"):
-
-    book = books[mbti]
+if st.button("💖 내 고전소설 찾아보기 💖", use_container_width=True):
 
     st.balloons()
 
     st.markdown(
-        f"""
-        <div class="book-card">
-
-            <div class="mbti">
-                ✨ {mbti} 독자를 위한 오늘의 책 ✨
-            </div>
-
-            <div class="book-title">
-                {book["emoji"]} {book["title"]}
-            </div>
-
-            <div class="author">
-                ✍️ {book["author"]}
-            </div>
-
-            <hr>
-
-            <div class="section">
-                💭 이 책을 추천하는 이유
-            </div>
-
-            <div class="description">
-                {book["reason"]}
-            </div>
-
-            <div class="section">
-                🌷 이런 이야기가 담겨 있어요
-            </div>
-
-            <div class="description">
-                {book["point"]}
-            </div>
-
-            <div class="section">
-                🧸 읽을 때 이런 생각을 해보세요
-            </div>
-
-            <div class="description">
-                {book["message"]}
-            </div>
-
-            <div class="cute-box">
-                📚 오늘 하루, 책 한 권과 조금 특별한 시간을 보내보세요 💕
-            </div>
-
-        </div>
-        """,
-        unsafe_allow_html=True
+        f"## 🌸 {mbti}에게 추천하는 고전소설 🌸"
     )
+
+    st.write("당신의 MBTI와 어울리는 고전소설을 준비했어요! 💕")
+
+    for i, (title, author, reason) in enumerate(books[mbti], 1):
+
+        st.markdown(
+            f"""
+            <div class="recommend-box">
+                <div class="book-title">
+                    📖 {i}. {title}
+                </div>
+                <div class="book-info">
+                    ✍️ 작가: {author}<br><br>
+                    💗 <b>추천 이유</b><br>
+                    {reason}
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+    st.success("✨ 마음에 드는 책을 골라서 읽어보세요! ✨")
 
 else:
 
-    st.markdown(
-        """
-        <div class="book-card">
+    st.info("👆 MBTI를 선택하고 버튼을 눌러주세요! 🌷")
 
-            <div style="text-align:center; font-size:24px;">
-                🧸 책장을 열어볼까요?
-            </div>
-
-            <div style="
-                text-align:center;
-                color:#999;
-                margin-top:12px;
-                line-height:1.8;
-            ">
-                MBTI를 선택하고<br>
-                💗 버튼을 눌러 나만의 고전소설을 찾아보세요!
-            </div>
-
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-
-
-# ----------------------------------------
-# 푸터
-# ----------------------------------------
 st.markdown(
-    '<div class="footer">Made with ♡ and 📚 for curious readers</div>',
+    '<div class="footer">📚 고전소설과 함께하는 작은 독서 여행 💕</div>',
     unsafe_allow_html=True
 )
